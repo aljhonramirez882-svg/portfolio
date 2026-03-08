@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljhon V Ramirez · student portfolio</title>
+    <!-- Font Awesome 6 (free) for crisp icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b1015;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #e5f0ff;
+            line-height: 1.5;
+        }
+
+        /* animated dark background */
+        .bg-aura {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, #1b2d3a, #0a0f16 80%);
+            z-index: -2;
+        }
+
+        .bg-aura::after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: radial-gradient(circle, rgba(0, 255, 200, 0.05) 0%, transparent 60%);
+            animation: slowSpin 30s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes slowSpin {
+            0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
+            100% { transform: rotate(15deg) scale(1.3); opacity: 1; }
+        }
+
+        /* main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem;
+            position: relative;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0 2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #9cf5e8, #6ec0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .logo i {
+            color: #3affd3;
+            margin-right: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            font-size: 1.2rem;
+        }
+
+        .nav-links a {
+            color: #c4daf0;
+            text-decoration: none;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            border-bottom-color: #3affd3;
+        }
+
+        /* ===== HERO SECTION (with MY IMAGE) ===== */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+            margin: 2rem 0 4rem;
+        }
+
+        .hero-image {
+            flex: 0 0 260px;
+            animation: floatImage 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatImage {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+
+        .image-frame {
+            background: rgba(0, 40, 45, 0.5);
+            border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+            padding: 0.7rem;
+            border: 2px solid #40ecd0;
+            box-shadow: 0 20px 30px -10px #00bba3, 0 0 0 2px rgba(0, 255, 200, 0.3) inset;
+            transition: transform 0.3s;
+        }
+
+        .image-frame:hover {
+            transform: scale(1.02);
+            border-color: #a0ffe6;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            border-radius: inherit;
+            display: block;
+            filter: drop-shadow(0 4px 8px #000000);
+        }
+
+        /* if image is missing, we show a stylish placeholder — but you will replace with your own photo */
+        .user-photo {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: inherit;
+            background: #15303e;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-text .greeting {
+            font-size: 1.6rem;
+            color: #9fe6da;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            background: linear-gradient(to right, #ffffff, #c6e4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-highlight {
+            color: #3cffe0;
+            border-bottom: 2px dashed #2da0b0;
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #c1d9f0;
+            max-width: 550px;
+            border-left: 4px solid #3affd3;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .info-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chip {
+            background: #11232e;
+            border: 1px solid #267888;
+            border-radius: 60px;
+            padding: 0.6rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .chip i {
+            color: #36eed0;
+            font-size: 1.4rem;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 1.5px solid;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: default;
+            background: transparent;
+        }
+
+        .btn-primary {
+            background: #1b4051;
+            border-color: #3bcab3;
+            color: #ebffff;
+            box-shadow: 0 0 15px #209e8b;
+        }
+
+        .btn-primary:hover {
+            background: #236c80;
+            border-color: #6effe6;
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 0 25px #18ecce;
+        }
+
+        .btn-outline {
+            border-color: #3e7f8f;
+            color: #d6f0ff;
+        }
+
+        .btn-outline:hover {
+            border-color: #6affdd;
+            background: rgba(0, 255, 200, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ===== TRAINING SECTION (MS WORD, POWERPOINT, EXCEL, C++, WEBDEV) ===== */
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin: 4rem 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title span {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3affd3, #2660b0);
+            border-radius: 4px;
+            animation: widthGlow 3s infinite alternate;
+        }
+
+        @keyframes widthGlow {
+            0% { width: 50px; opacity: 0.8; }
+            100% { width: 110px; opacity: 1; background: #85ffe6; }
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .skill-card {
+            background: rgba(18, 35, 48, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid #2c6f81;
+            border-radius: 2rem;
+            padding: 2rem 1.5rem;
+            transition: all 0.3s;
+            animation: cardPop 0.7s backwards;
+            animation-delay: calc(0.1s * var(--card-order));
+        }
+
+        .skill-card:nth-child(1) { --card-order: 1; }
+        .skill-card:nth-child(2) { --card-order: 2; }
+        .skill-card:nth-child(3) { --card-order: 3; }
+        .skill-card:nth-child(4) { --card-order: 4; }
+        .skill-card:nth-child(5) { --card-order: 5; }
+
+        @keyframes cardPop {
+            0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .skill-card:hover {
+            border-color: #4affda;
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 25px -8px #08242e, 0 0 0 2px rgba(0, 255, 200, 0.3);
+            background: #1a3a4b;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            background: linear-gradient(145deg, #3df0d0, #4390f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-desc {
+            color: #b7d5ee;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: #0d3342;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 0.9rem;
+            border: 1px solid #249b9b;
+            color: #bef2ff;
+        }
+
+        /* ===== lyceum & training program highlight ===== */
+        .training-program {
+            background: #0b222e;
+            border-radius: 2.5rem;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0;
+            border-left: 8px solid #2fffd0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .program-icon i {
+            font-size: 4rem;
+            color: #54ffdf;
+        }
+
+        .program-text h2 {
+            font-size: 2.2rem;
+            color: #efff fa;
+        }
+
+        .program-text p {
+            color: #c1deed;
+            font-size: 1.2rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0 1rem;
+            border-top: 1px solid #265362;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .social a {
+            color: #b8e0ff;
+            font-size: 1.8rem;
+            margin-right: 1.5rem;
+            transition: 0.2s;
+        }
+
+        .social a:hover {
+            color: #3affd3;
+            transform: translateY(-5px);
+            display: inline-block;
+        }
+
+        .copyright {
+            color: #608b9b;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .container { padding: 1.2rem; }
+            .hero-text h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-aura"></div>
+
+    <div class="container">
+        <!-- navigation -->
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-regular fa-id-card"></i> AVR
+            </div>
+            <div class="nav-links">
+                <a href="#">home</a>
+                <a href="#training">my training</a>
+                <a href="#">contact</a>
+            </div>
+        </nav>
+
+        <!-- ========== LANDING PAGE with MY IMAGE ========== -->
+        <div class="hero">
+            <!-- left: my image (replace src with your actual image file name) -->
+            <div class="hero-image">
+                <div class="image-frame">
+                    <!-- 👇👇 REPLACE "aljhon-photo.jpg" WITH YOUR ACTUAL IMAGE FILE NAME -->
+                    <img src="profile.png" alt="Aljhon V Ramirez" class="user-photo" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22400%22%20viewBox%3D%220%200%20400%20400%22%3E%3Crect%20width%3D%22400%22%20height%3D%22400%22%20fill%3D%22%231d4b5e%22%2F%3E%3Ctext%20x%3D%2280%22%20y%3D%22240%22%20font-size%3D%22120%22%20fill%3D%22%23b0ffe6%22%3EAJR%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                </div>
+            </div>
+
+            <!-- right: name and details -->
+            <div class="hero-text">
+                <div class="greeting"><i class="fa-regular fa-hand-peace"></i> hey, i'm</div>
+                <h1>Aljhon V Ramirez</h1>
+                <div class="hero-desc">
+                    <span class="hero-highlight">high school student</span> at Patao National High School · future CSU Carig freshman. I love Mobile Legends & volleyball.
+                </div>
+
+                <!-- info chips (hobbies) -->
+                <div class="info-chips">
+                    <div class="chip"><i class="fa-regular fa-gamepad-modern"></i> Mobile Legends</div>
+                    <div class="chip"><i class="fa-regular fa-volleyball"></i> Volleyball</div>
+                    <div class="chip"><i class="fa-regular fa-graduation-cap"></i> CSU Carig</div>
+                </div>
+
+                <!-- call to action (scroll to training) -->
+                <div class="btn-row">
+                    <a href="#training" class="btn btn-primary"><i class="fa-regular fa-briefcase"></i> view my training</a>
+                    <span class="btn btn-outline"><i class="fa-regular fa-message"></i> story</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TRAINING SECTION (exactly 5 skills) ========== -->
+        <div id="training" class="section-title">
+            <span></span> IT training · LOA-ATP / Lyceum of Aparri
+        </div>
+
+        <div class="training-grid">
+            <!-- 1. Microsoft Word -->
+            <div class="skill-card">
+                <div class="card-icon"><i class="fa-regular fa-file-word"></i></div>
+                <h3>MS Word</h3>
+                <div class="skill-desc">Document formatting, mail merge, reports, tables and styles. Created resumes and projects.</div>
+                <span class="skill-tag">intermediate</span>
+            </div>
+            <!-- 2. PowerPoint -->
+            <div class="skill-card">
+                <div class="card-icon"><i class="fa-regular fa-file-powerpoint"></i></div>
+                <h3>PowerPoint</h3>
+                <div class="skill-desc">Slide design, animations, effective presentations, storytelling with visuals.</div>
+                <span class="skill-tag">with transitions</span>
+            </div>
+            <!-- 3. Excel -->
+            <div class="skill-card">
+                <div class="card-icon"><i class="fa-regular fa-file-excel"></i></div>
+                <h3>Excel</h3>
+                <div class="skill-desc">Formulas, basic pivot tables, charts, data sorting, and simple spreadsheets.</div>
+                <span class="skill-tag">formulas & charts</span>
+            </div>
+            <!-- 4. C++ simple programming -->
+            <div class="skill-card">
+                <div class="card-icon"><i class="fa-regular fa-code"></i></div>
+                <h3>C++ basics</h3>
+                <div class="skill-desc">Loops, conditionals, simple I/O, basic functions — first steps in programming.</div>
+                <span class="skill-tag">#include &lt;iostream&gt;</span>
+            </div>
+            <!-- 5. Webdev portfolio (this page) -->
+            <div class="skill-card">
+                <div class="card-icon"><i class="fa-regular fa-laptop-code"></i></div>
+                <h3>portfolio web</h3>
+                <div class="skill-desc">Built this responsive dark-themed portfolio using HTML, CSS, and a bit of JS.</div>
+                <span class="skill-tag">HTML + CSS only</span>
+            </div>
+        </div>
+
+        <!-- training program extra description -->
+        <div class="training-program">
+            <div class="program-icon"><i class="fa-regular fa-building-columns"></i></div>
+            <div class="program-text">
+                <h2>📍 LOA-ATP @ Lyceum of Aparri</h2>
+                <p>IT training program — hands-on with Microsoft Office (Word, PowerPoint, Excel), introductory C++ programming, and creating this portfolio website. A solid foundation in tech.</p>
+            </div>
+        </div>
+
+        <!-- mini project tags (just for extra color) -->
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
+            <span style="border: 1px solid #28b3a3; border-radius: 40px; padding: 0.5rem 1.5rem;"><i class="fa-regular fa-calculator"></i> C++ calculator</span>
+            <span style="border: 1px solid #28b3a3; border-radius: 40px; padding: 0.5rem 1.5rem;"><i class="fa-regular fa-chart-simple"></i> Excel budget</span>
+            <span style="border: 1px solid #28b3a3; border-radius: 40px; padding: 0.5rem 1.5rem;"><i class="fa-regular fa-file-lines"></i> Word report</span>
+            <span style="border: 1px solid #28b3a3; border-radius: 40px; padding: 0.5rem 1.5rem;"><i class="fa-regular fa-display"></i> portfolio</span>
+        </div>
+
+        <!-- footer / social -->
+        <div class="footer">
+            <div class="social">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-regular fa-envelope"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            </div>
+            <div class="copyright">
+                <i class="fa-regular fa-copyright"></i> 2026 Aljhon V Ramirez · Patao NHS · CSU bound
+            </div>
+        </div>
+    </div>
+
+    <!-- simple JavaScript for smooth scroll and minor effect -->
+    <script>
+        (function() {
+            // smooth scroll to training when clicking "view my training"
+            const viewBtn = document.querySelector('a[href="#training"]');
+            if (viewBtn) {
+                viewBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.getElementById('training');
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+
+            // optional: dynamic year in console
+            console.log("Aljhon's portfolio — MS Word, PowerPoint, Excel, C++, webdev");
+        })();
+    </script>
+</body>
+</html>
